@@ -8,7 +8,8 @@ const track = {
   name: "Hello",
   artist: "Again",
   album: "Friend of a friend",
-  id: 0
+  id: 0,
+  uri: "___"
 };
 
 const tracks = [track, track, track];
@@ -23,6 +24,8 @@ class App extends React.Component {
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
 
   addTrack(track) {
@@ -30,20 +33,31 @@ class App extends React.Component {
       if(track.id === id)
         return;
     });
-    this.setState((state, track) => ({
-      playlistTracks: state.playlistTracks.push(track)
+    this.setState((state) => ({
+      playlistTracks: [...state.playlistTracks, track]
     }));
   }
 
   removeTrack(track) {
-    this.state.playlistTracks.map(id => {
-      if(track.id === id)
-        {
-          this.setState((state, track) => ({
-            playlistTracks: state.playlistTracks.remove(track)
-          }));
-        }
+    var array = [...this.state.playlistTracks];
+    var index = array.indexOf(track);
+    array.splice(index, 1);
+    this.setState({
+      playlistTracks: array
     });
+  }
+
+  updatePlaylistName(name) {
+    if(name != this.state.playlistName)
+    {
+      this.setState({
+        playlistName: name
+      });
+    }
+  }
+
+  savePlaylist(){
+
   }
 
   render(){
@@ -54,7 +68,7 @@ class App extends React.Component {
         <SearchBar />
         <div className="App-playlist">
           <SearchResults searchResults={this.state.searchResults} onAdd= {this.addTrack}/>
-          <Playlist name= {this.state.playlistName} tracks= {this.state.playlistTracks} onRemove= {this.removeTrack}/>
+          <Playlist name= {this.state.playlistName} tracks= {this.state.playlistTracks} onRemove= {this.removeTrack} onNameChange= {this.updatePlaylistName}/>
         </div>
       </div>
     </div>

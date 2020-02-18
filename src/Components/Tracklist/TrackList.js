@@ -11,7 +11,7 @@ function TracklList (props) {
                         track={track} 
                         key={track.id} 
                         onAdd= {props.onAdd} 
-                        onRemoval= {props.onRemoval}
+                        onRemove= {props.onRemove}
                         isRemove= {props.isRemove}
                     />;
                 })
