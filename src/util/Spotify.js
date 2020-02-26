@@ -1,5 +1,5 @@
 const clientID = '3238fb1f46c543eb8d4250de9530f241';
-const redirectURI = 'http://localhost:3000/';
+const redirectURI = 'http://seanjammming.surge.sh/';
 
 let accessToken;
 
